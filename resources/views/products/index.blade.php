@@ -33,11 +33,24 @@
                     <td>{{ $product->supplier->name }}</td>
                     <td>{{ $product->amount }}</td>
                     <td>
-                        <button class="btn btn-primary">Editar</button>
-                        <button class="btn btn-danger">Excluir</button>
+                        <a href="{{ route('products_edit', ['id' => $product->id]) }}" class="btn btn-primary">Editar</a>
+                        <button type="button" class="btn btn-danger delete-product" data-route="{{ route('products_destroy', ['id' => $product->id]) }}">Excluir</button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+@endsection
+@section('scripts')
+    <script>
+        function confirmProductDelete() {
+            var route = $(this).data('route');
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                window.location.href = route;
+            }
+        }
+
+        $(document).delegate('.delete-product', 'click', confirmProductDelete)
+    </script>
+
 @endsection
