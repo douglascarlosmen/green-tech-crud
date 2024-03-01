@@ -27,11 +27,25 @@
                     <td>{{ $supplier->getContactInfoForIndex() }}</td>
                     <td>{{ $supplier->getFormattedAddressForIndex() }}</td>
                     <td>
-                        <button class="btn btn-primary">Editar</button>
-                        <button class="btn btn-danger">Excluir</button>
+                        <a href="{{ route('supplier_edit', ['id' => $supplier->id]) }}" class="btn btn-primary">Editar</a>
+                        <button type="button" class="btn btn-danger delete-supplier"
+                            data-route="{{ route('supplier_destroy', ['id' => $supplier->id]) }}">Excluir</button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+@endsection
+@section('scripts')
+    <script>
+        function confirmSupplierDelete() {
+            var route = $(this).data('route');
+            if (confirm('Tem certeza que deseja excluir este fornecedor?')) {
+                window.location.href = route;
+            }
+        }
+
+        $(document).delegate('.delete-supplier', 'click', confirmSupplierDelete)
+    </script>
+
 @endsection
