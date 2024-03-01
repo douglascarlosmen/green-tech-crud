@@ -3,11 +3,8 @@
 @section('title', 'Fornecedores')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
+
+    @include('includes.success')
     <a href="{{ route('suppliers_create') }}" class="btn btn-success">Cadastrar Fornecedor</a>
     <table class="table">
         <thead>
