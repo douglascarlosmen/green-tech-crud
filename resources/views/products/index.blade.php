@@ -3,6 +3,12 @@
 @section('title', 'Produtos')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    <a href="{{ route('products_create') }}" class="btn btn-success">Cadastrar Produto</a>
     <table class="table">
         <thead>
             <tr>
@@ -17,19 +23,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">123456</th>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>
-                    <button class="btn btn-primary">Editar</button>
-                    <button class="btn btn-danger">Excluir</button>
-                </td>
-            </tr>
+            @foreach ($products as $product)
+                <tr>
+                    <th scope="row">{{ $product->code }}</th>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->category }}</td>
+                    <td>{{ $product->supplier->name }}</td>
+                    <td>{{ $product->amount }}</td>
+                    <td>
+                        <button class="btn btn-primary">Editar</button>
+                        <button class="btn btn-danger">Excluir</button>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection

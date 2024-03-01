@@ -27,4 +27,10 @@ Route::group(['prefix' => '', 'middleware' => 'auth'], function () {
         Route::post('atualizar/{id}', [SuppliersController::class, 'update'])->name('supplier_update');
         Route::get('excluir/{id}', [SuppliersController::class, 'destroy'])->name('supplier_destroy');
     });
+
+    Route::group(['prefix' => 'produtos'], function () {
+        Route::get('', [ProductsController::class, 'index'])->name('products_index');
+        Route::get('cadastro', [ProductsController::class, 'create'])->name('products_create');
+        Route::post('salvar', [ProductsController::class, 'store'])->name('products_store');
+    });
 });
