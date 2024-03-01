@@ -3,6 +3,12 @@
 @section('title', 'Fornecedores')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    <a href="{{ route('suppliers_create') }}" class="btn btn-success">Cadastrar Fornecedor</a>
     <table class="table">
         <thead>
             <tr>
@@ -14,16 +20,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">123456</th>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>Valor 1</td>
-                <td>
-                    <button class="btn btn-primary">Editar</button>
-                    <button class="btn btn-danger">Excluir</button>
-                </td>
-            </tr>
+            @foreach ($suppliers as $supplier)
+                <tr>
+                    <th scope="row">{{ $supplier->id }}</th>
+                    <td>{{ $supplier->name }}</td>
+                    <td>{{ $supplier->getContactInfoForIndex() }}</td>
+                    <td>{{ $supplier->getFormattedAddressForIndex() }}</td>
+                    <td>
+                        <button class="btn btn-primary">Editar</button>
+                        <button class="btn btn-danger">Excluir</button>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection

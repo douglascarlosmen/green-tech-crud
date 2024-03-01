@@ -21,5 +21,7 @@ Route::group(['prefix'=> '', 'middleware' => 'auth'], function () {
 
     Route::group(['prefix'=> 'fornecedores'], function () {
         Route::get('', [SuppliersController::class, 'index'])->name('suppliers_index');
+        Route::get('cadastro', [SuppliersController::class, 'create'])->name('suppliers_create');
+        Route::post('salvar', [SuppliersController::class, 'store'])->name('supplier_store');
     });
 });
